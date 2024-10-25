@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface CustomerQNAMapper {
 	//2
-	@Insert("insert into customerqna(title, content, username, password) values(#{title}, #{content}, #{username}, #{password}")
+	@Insert("insert into customerqna(title, content, username, password) values(#{title}, #{content}, #{username}, #{password})")
 	void insert();
 
 	//3

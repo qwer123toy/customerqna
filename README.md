@@ -21,7 +21,7 @@
 <p align="left">
   <a href="#What-is">What is</a> <br>
   <a href="#기능-설명">기능 설명</a>  <br>
-  <a href="#development-setup--database-design">Development Setup</a> <br>
+  <a href="#development-setup">Development Setup</a> <br>
   <a href="#repository-structure">Repository Structure</a> <br>
   <a href="#authors">Authors</a>
 </p>
@@ -63,7 +63,7 @@
 
 <br>
 
-## Development setup / Database Design
+## Development setup
 
 * 본 프로젝트는 사용자들이 익명 게시판을 통해 다양한 정보를 공유하고 수정 및 삭제를 할 수 있도록 설계된 웹 사이트
 * 이를 통해 사용자는 다양한 정보를 검색 또는 직접 확인할 수 있으며, 숨김 시스템을 통해 특정 사용자들끼리만도 정보 공유 가능
@@ -79,7 +79,8 @@
   - 데이터베이스 연결 및 검색 기능 구현하여 사용자가 필요한 정보 검색 가능
   - JUnitTest를 통해 생성한 메서드들과 기능들을 테스트하였으며, 올바른 결과값이 나왔을 경우 직접 적용하는 방식으로 디버깅 수행
 
-본 프로젝트는 익명 게시판 개발을 목표로 하여, 다양한 정보를 효과적으로 공유하고 익명의 사용자들 간의 소통을 손쉽게 수행할 수 있도록 제작하였음. 앞으로도 지속적인 기능 추가를 통해 더 나은 서비스 제공을 계획.
+* 본 프로젝트는 익명 게시판 개발을 목표로 하여, 다양한 정보를 효과적으로 공유하고 익명의 사용자들 간의 소통을 손쉽게 수행할 수 있도록 제작하였음
+* 앞으로도 지속적인 기능 추가를 통해 더 나은 서비스 제공을 계획 중
 
 <br>
 

@@ -20,7 +20,7 @@
 <p align="left">목차</p>
 <p align="left">
   <a href="#What-is">What is</a> <br>
-  <a href="기능-설명">기능 설명</a>  <br>
+  <a href="#기능-설명">기능 설명</a>  <br>
   <a href="#development-setup--database-design">Development Setup</a> <br>
   <a href="#repository-structure">Repository Structure</a> <br>
   <a href="#authors">Authors</a>
@@ -52,14 +52,14 @@
 
 | 핵심 기능                | 설명                                                                                                                                                       |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[QNA_Controller](src/main/java/kr/co/greenart/web/customer/qna/QNA_Controller.java)**                  | 가게 부분의 기능과 DB연결을 처리<br> - Mapper와 ServiceImpl 클래스를 통해 MySQL과 연결하여 DB와 연동 및 SQL문을 처리하고 가게 정보들을 불러오거나 저장                                |
-| **[QNA_ControllerAdvice](src/main/java/kr/co/greenart/web/customer/qna/QNA_ControllerAdvice.java)**                 | 회원가입과 로그인 등의 유저 관리<br> - 기본적으로 DB와 연동하여 처리되며, JSON으로 값을 불러온 뒤 UserValidator를 통해 유효성 검사를 진행하고 모두 통과했을 때 가입을 완료                                     |
-| **[QNA_ServiceImpl](src/main/java/kr/co/greenart/web/customer/qna/QNA_ServiceImpl.java)**                 | Filter 클래스를 통해 로그인과 로그아웃 상태를 확인하여 처리<br> - session을 확인하여 로그인 상태를 확인하고 특정 페이지의 경우 로그인이 되어있는지 확인하여 안되어있을 경우 로그인 페이지로 이동하도록 구현                                      |
-| **[QNA_Mapper](src/main/java/kr/co/greenart/web/customer/qna/QNA_Mapper.java)**           | 사용자의 예산과 원하는 태그에 맞는 가게 검색<br>  - 사용자와 카페의 정보를 초기화하고, 카테고리와 가격 조건에 맞는 카페 리스트를 검색하여 카페에 대한 사진 및 태그 정보를 병합한 뒤 결과를 제공                                                  |
-| **[메인 페이지](src/main/webapp/WEB-INF/views/qna.jsp)**      | 지역별로 찾고 싶은 가게 리스트 출력<br> - 요청된 지역에 맞는 카페 목록을 검색하고, 해당 카페와 관련된 이미지 정보를 병합하여 JSON 형식으로 응답한 뒤 상태 코드를 설정하여 성공 또는 실패를 사용자에게 전달       |
-| **[작성글 보기](src/main/webapp/WEB-INF/views/qnaDetail.jsp)**        | 선택한 가게의 세부 정보를 사용자에게 보여줌<br> - 특정 카페의 세부 정보를 조회하여, 가게 정보, 메뉴 목록, 리뷰, 평균 평점, 카테고리, 태그 및 이미지를 보여주며, 예외 발생 시 에러 페이지로 포워딩                     |
-| **[게시글 작성](src/main/webapp/WEB-INF/views/qnaForm.jsp)**    | 사업주로 등록된 사용자가 가게 정보를 등록하고 DB에 저장 <br> - 페이지에서 가게 정보를 입력하고 전송. GET 요청으로 카테고리 목록과 소유자 ID를 제공하며, POST 요청에서는 JSON 데이터를 읽고 가게 정보, 태그, 이미지를 데이터베이스에 저장                |
-| **[게시글 수정](src/main/webapp/WEB-INF/views/qnaUpdate.jsp)**               | 관리자가 가입된 사용자들의 정보와 사업자등록증 등 확인 및 제재 가능 <br> DB에서 사용자 리스트를 조회하여 가져오며, 사업주의 경우 사업자등록증 확인 가능. 아이디별로 활성화/비활성화 가능                                                        |
+| **[QNA_Controller](src/main/java/kr/co/greenart/web/customer/qna/QNA_Controller.java)**                  | ● Q&A 게시판의 조회, 작성, 수정, 삭제 기능을 관리하며, 페이징과 검색, 보안 접근 제어를 구현한 스프링 컨트롤러 <br> -  Q&A 게시물을 조회하고 검색할 수 있도록 페이징 기능을 제공하며, 게시물 작성, 수정, 삭제를 처리 <br> - 보안이 필요한 게시물에 대해서는 비밀번호 인증을 통해 접근을 제어하고, 세션 관리를 통해 사용자 권한을 유지              |
+| **[QNA_ControllerAdvice](src/main/java/kr/co/greenart/web/customer/qna/QNA_ControllerAdvice.java)**                 | ● QNA_Controller에서 발생하는 QNA_NotFoundException을 처리하여 404 페이지로 리다이렉트      |
+| **[QNA_ServiceImpl](src/main/java/kr/co/greenart/web/customer/qna/QNA_ServiceImpl.java)**                 |  ● Q&A 게시판의 DB 로직을 구현하며, 다양한 게시물 조회, 검색, 수정, 삭제, 카운팅 기능을 제공     |
+| **[QNA_Mapper](src/main/java/kr/co/greenart/web/customer/qna/QNA_Mapper.java)**           | ● QNA 관련 SQL 쿼리를 수행하여 CRUD 작업과 데이터 조회 기능을 제공                                             |
+| **[메인 페이지](src/main/webapp/WEB-INF/views/qna.jsp)**      | ● Q&A 게시글 목록을 페이징, 검색, 정렬 옵션과 함께 표시하는 JSP 페이지       |
+| **[작성글 보기](src/main/webapp/WEB-INF/views/qnaDetail.jsp)**        | ● 게시글 상세 페이지로, 제목, 작성자, 작성일자/수정일자, 조회수, 내용 등을 표시하고 목록, 삭제, 수정 버튼을 제공                    |
+| **[게시글 작성](src/main/webapp/WEB-INF/views/qnaForm.jsp)**    | ● 게시글 작성을 위한 폼으로, 제목, 이름, 비밀번호, 내용을 입력받고 추가 버튼과 취소 버튼을 제공              |
+| **[게시글 수정](src/main/webapp/WEB-INF/views/qnaUpdate.jsp)**               | ● 게시글 수정 폼으로, 사용자가 제목, 이름, 비밀번호 및 내용을 입력할 수 있도록 구성 <br> 수정하기 버튼과 돌아가기 버튼이 포함되어 있으며, 수정 중 에러가 발생할 경우 에러 메시지를 표시                                                  |
 
 <br>
 
@@ -106,8 +106,8 @@
 
 <p align="center">
   <h2>Built With</h2>
-  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
-  <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
+  <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white">
+  <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white">
 
 <br>
 

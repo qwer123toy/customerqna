@@ -30,21 +30,18 @@
 ---
 
 ## 기능 설명
-[메인 서블릿](src/main/java/main/controller)
- - 초기화면 페이지 및 각 페이지 별 서블릿 연결
- - 애플리케이션 전체 설정 관리
-   
-[유저 관리 서블릿](src/main/java/user)
- - 유저 관리 페이지
- - 회원가입과 예외처리, 유효성 확인
- - 로그인 및 일반회원, 사업주, 관리자 구분
- - 건의사항 작성 및 관리
- - 사용자 인증 및 세션 관리
 
-[가게관리 서블릿](src/main/java/cafeteria)
- - 가게 정보 등록
- - 가게의 메뉴 관리 및 리뷰 확인
- - 리뷰에 따른 평점 변경
+[QNA_Controller](src/main/java/kr/co/greenart/web/customer/qna/QNA_Controller.java)
+ - 초
+
+[QNA_ControllerAdvice](src/main/java/kr/co/greenart/web/customer/qna/QNA_ControllerAdvice.java)
+ - 초
+   
+[QNA_ServiceImpl](src/main/java/kr/co/greenart/web/customer/qna/QNA_ServiceImpl.java)
+ - 유
+
+[QNA_Mapper](src/main/java/kr/co/greenart/web/customer/qna/QNA_Mapper.java)
+ - as
 
 [지도 서블릿](src/main/java/enjoyfood)
  - 지도 페이지

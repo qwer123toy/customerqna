@@ -18,6 +18,10 @@ INSERT INTO customerqna (title, content, username, password) VALUES ('제목4','
 INSERT INTO customerqna (title, content, username, password) VALUES ('제목5','내용2','이름5','1');
 INSERT INTO customerqna (title, content, username, password) VALUES ('제목6','내용2','이름6','1');
 INSERT INTO customerqna (title, content, username, password) VALUES ('제목7','내용2','이름6','1');
+INSERT INTO customerqna (title, content, username, password) VALUES ('제목4','내용2','이름4','1');
+INSERT INTO customerqna (title, content, username, password) VALUES ('제목5','내용2','이름5','1');
+INSERT INTO customerqna (title, content, username, password) VALUES ('제목6','내용2','이름6','1');
+INSERT INTO customerqna (title, content, username, password) VALUES ('제목7','내용2','이름6','1');
 
-update customerqna set is_secure=1 where article_id =3;
-update customerqna set is_secure=1 where article_id =5;
+
+update customerqna set is_secure=1;

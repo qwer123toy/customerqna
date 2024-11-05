@@ -61,5 +61,29 @@ public class QNA_ServiceImpl implements QNA_Service {
 		return mapper.count();
 	}
 
+	@Override
+	public int countSecure() {
+		// TODO Auto-generated method stub
+		return mapper.countSecure();
+	}
+
+	@Override
+	public List<QNA> findBySearch(String search, int pageSize, int offset) {
+		// TODO Auto-generated method stub
+		return mapper.findBySearch(search, pageSize, offset);
+	}
+
+	@Override
+	public int countSearch(String search) {
+		// TODO Auto-generated method stub
+		return mapper.countSearch(search);
+	}
+
+	@Override
+	public int updateInfo(QNA qna, String inputPassword) {
+		// TODO Auto-generated method stub
+		return mapper.updateInfo(qna, inputPassword);
+	}
+
 	
 }

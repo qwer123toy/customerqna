@@ -23,7 +23,7 @@ public class DemoApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		for(int i=2; i<7; i++) {
+		for(int i=2; i<546; i++) {
 			service.save(QNA.builder().title("title"+i).content("content" +i).username("username"+i).password("password"+i).build());
 		}
 		

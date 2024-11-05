@@ -84,17 +84,17 @@
   <div class="container">
     <h1>게시글 삭제하기</h1>
     <form method="post">
-      <input type="hidden" name="articleId" value="${articleId }">
+      <input type="hidden" name="articleId" value="${qna.articleId }">
       <table>
         <tr>
           <th class="title1">제목</th>
-          <th class="title">${qna.title}</th>
+          <th class="title"><input type="text" name="title" value="${qna.title}"></th>
           <th class="username1">이름</th>
-          <th class="username">${qna.username}</th>
-          <th class="password"><input type="password" name="password" placeholder="비밀번호 입력"></th>
+          <th class="username"><input type="text" name="username" value="${qna.username}"></th>
+          <th class="password"><input type="password" name="inputPassword" placeholder="비밀번호 입력"></th>
         </tr>
         <tr>
-          <td colspan="5">${qna.content}</td>
+          <td colspan="5"><input type="text" name="content" value="${qna.content}"></td>
         </tr>
       </table>
       <c:choose>
@@ -102,9 +102,8 @@
 				<div class="error-message">${errorMessage}</div>
 			</c:when>
 		</c:choose>
-      
       <div class="action-buttons">
-        <input type="submit" value="삭제하기">
+        <input type="submit" value="수정하기">
         <input type="button" value="돌아가기" onclick="window.location.href='/qna/${articleId}'">
       </div>
     </form>

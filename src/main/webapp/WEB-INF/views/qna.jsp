@@ -17,6 +17,13 @@ body {
 	padding: 0;
 }
 
+select, input[type="text"] {
+	padding: 10px;
+	margin: 5px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
 /* 컨테이너 스타일 */
 .container {
 	width: 80%;
@@ -25,6 +32,39 @@ body {
 	padding: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	border-radius: 8px;
+}
+
+/* container2 스타일 */
+.container2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+/* 검색 입력 필드 스타일 */
+.container2 input[type="text"] {
+	width: 60%;
+	padding: 10px;
+	margin-right: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+}
+
+/* 검색 버튼 스타일 */
+.container2 input[type="submit"] {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s;
+}
+
+/* 검색 버튼 호버 효과 */
+.container2 input[type="submit"]:hover {
+	background-color: #0056b3;
 }
 
 /* 테이블 스타일 */
@@ -102,8 +142,8 @@ nav {
 nav a {
 	margin: 0 5px;
 	padding: 8px 12px;
-	background-color: #007bff;
-	color: #fff;
+	background-color: #e9ecef;
+	color: #343a40;
 	border-radius: 4px;
 	text-decoration: none;
 	transition: background-color 0.3s;
@@ -115,8 +155,8 @@ nav a:hover {
 
 .current-page {
 	font-weight: bold;
-	color: #343a40;
-	background-color: #e9ecef;
+	color: #fff;
+	background-color: #007bff;
 }
 </style>
 </head>
@@ -124,51 +164,134 @@ nav a:hover {
 	<div class="container">
 		<h1>게시글 목록</h1>
 		<div class="action-buttons">
-			<a href="/qnaForm">게시글 추가하기</a>
-			<a href="/qna">게시글 전체 보기</a>
-			<a href="/qnaSecure">숨긴 게시글만 보기</a>
+			<a href="/qnaForm">게시글 추가하기</a> <a href="/qna">게시글 전체 보기</a> <a
+				href="/qnaSecure">숨긴 게시글만 보기</a>
 		</div>
-		<table>
-			<tr>
-				<th class="articleId">번호</th>
-				<th class="title">제목</th>
-				<th class="username">작성자</th>
-				<th class="username">숨김여부</th>
-				<th class="createdAt">작성일자</th>
-				<th class="views">조회수</th>
-			</tr>
-			<c:forEach items="${list}" var="qna">
-				<tr>
-					<td class="articleId">${qna.articleId}</td>
-					<td class="title">
-						<c:choose>
-							<c:when test="${qna.secure == true}">${qna.title}</c:when>
-							<c:otherwise>
-								<a href="/qna/${qna.articleId}">${qna.title}</a>
+		<div class="container2">
+
+			<form action="/qna" method="post">
+				<select name="sortOrder">
+					<option value="created_at">최신순</option>
+					<option value="views">조회수순</option>
+				</select>
+				<c:choose>
+					<c:when test="${not empty search}">
+						<input type="text" value="${search}" name="search">
+					</c:when>
+					<c:otherwise>
+						<input type="text" placeholder="제목이나 내용을 검색하세요" name="search">
+					</c:otherwise>
+				</c:choose>
+				<input type="submit" value="검색">
+			</form>
+		</div>
+		<div class="container2">
+			<form method="post">
+				<c:choose>
+					<c:when test="${not empty search && not empty list}">
+						<input type="text" placeholder="결과 내 검색" name="search">
+						<input type="submit" value="검색">
+					</c:when>
+					<c:otherwise>
+
+					</c:otherwise>
+				</c:choose>
+			</form>
+		</div>
+		<c:choose>
+			<c:when test="${empty list}">
+				<p>검색 결과가 없습니다.</p>
+			</c:when>
+			<c:otherwise>
+				<table>
+					<tr>
+						<th class="articleId">번호</th>
+						<th class="title">제목</th>
+						<th class="username">작성자</th>
+						<th class="username">숨김여부</th>
+						<th class="createdAt">작성일자</th>
+						<th class="views">조회수</th>
+					</tr>
+
+					<c:forEach items="${list}" var="qna">
+						<tr>
+							<td class="articleId">${qna.articleId}</td>
+							<td class="title"><c:choose>
+									<c:when test="${qna.secure == true}">${qna.title}</c:when>
+									<c:otherwise>
+										<a href="/qna/${qna.articleId}">${qna.title}</a>
+									</c:otherwise>
+								</c:choose></td>
+							<td class="username">${qna.username}</td>
+							<td class="secure"><c:choose>
+									<c:when test="${qna.secure == true}">숨김</c:when>
+									<c:otherwise>공개</c:otherwise>
+								</c:choose></td>
+							<td><c:choose>
+									<c:when test="${qna.createdAt == qna.updatedAt }">
+							${qna.createdAt}
+							</c:when>
+									<c:otherwise>
+							${qna.updatedAt}
 							</c:otherwise>
-						</c:choose>
-					</td>
-					<td class="username">${qna.username}</td>
-					<td class="secure">
-						<c:choose>
-							<c:when test="${qna.secure == true}">숨김</c:when>
-							<c:otherwise>공개</c:otherwise>
-						</c:choose>
-					</td>
-					<td>${qna.createdAt}</td>
-					<td class="views">${qna.views}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<nav>
-			<c:forEach var="num" begin="0" end="${totalPages-1}">
-				<c:url var="pages" value="/qna">
-					<c:param name="page">${num}</c:param>
-					<c:param name="size">${size}</c:param>
-				</c:url>
-				<a href="${pages}" class="${page == num ? 'current-page' : ''}">${num + 1}</a>
-			</c:forEach>
-		</nav>
+								</c:choose></td>
+							<td class="views">${qna.views}</td>
+						</tr>
+					</c:forEach>
+
+				</table>
+				<nav>
+					<!-- 이전 페이지 그룹으로 이동 (startPage가 0보다 클 때만 표시) -->
+					<c:if test="${startPage > 0}">
+						<!-- 이전 페이지 그룹 시작 페이지로 이동하는 URL 생성 -->
+						<c:url var="prevGroup" value="/qna">
+							<!-- 현재 그룹의 시작 페이지에서 페이지 크기만큼 감소한 페이지 번호로 설정 -->
+							<c:param name="page">${startPage - 1}</c:param>
+							<c:param name="size">${size}</c:param>
+							<!-- 한 페이지당 항목 수를 유지 -->
+							<c:param name="search">${search}</c:param>
+							<!-- 검색어 유지 -->
+						</c:url>
+						<!-- 이전 페이지 그룹으로 이동하는 링크 생성 -->
+						<a href="${prevGroup}">이전</a>
+					</c:if>
+
+					<!-- 현재 페이지 그룹 내에서 페이지 번호 표시 -->
+					<c:forEach var="num" begin="${startPage}" end="${endPage}">
+						<!-- 각 페이지 번호에 대한 URL 생성 -->
+						<c:url var="pages" value="/qna">
+							<c:param name="page">${num}</c:param>
+							<!-- 현재 반복 중인 페이지 번호로 설정 -->
+							<c:param name="size">${size}</c:param>
+							<!-- 한 페이지당 항목 수를 유지 -->
+							<c:param name="search">${search}</c:param>
+							<!-- 검색어 유지 -->
+						</c:url>
+						<!-- 현재 페이지는 'current-page' 클래스를 적용하여 강조 -->
+						<a href="${pages}" class="${page == num ? 'current-page' : ''}">${num + 1}</a>
+					</c:forEach>
+
+					<!-- 다음 페이지 그룹으로 이동 (endPage가 마지막 페이지가 아닐 때만 표시) -->
+					<c:if test="${endPage < totalPages - 1}">
+						<!-- 다음 페이지 그룹 시작 페이지로 이동하는 URL 생성 -->
+						<c:url var="nextGroup" value="/qna">
+							<!-- 현재 그룹의 끝 페이지에서 1을 더한 페이지 번호로 설정 -->
+							<c:param name="page">${endPage + 1}</c:param>
+							<c:param name="size">${size}</c:param>
+							<!-- 한 페이지당 항목 수를 유지 -->
+							<c:param name="search">${search}</c:param>
+							<!-- 검색어 유지 -->
+						</c:url>
+						<!-- 다음 페이지 그룹으로 이동하는 링크 생성 -->
+						<a href="${nextGroup}">다음</a>
+					</c:if>
+				</nav>
+
+
+
+			</c:otherwise>
+		</c:choose>
+
 	</div>
 </body>
 </html>
